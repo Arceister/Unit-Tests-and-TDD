@@ -32,8 +32,8 @@ describe 'Game' do
     end
 
     it 'should be a valid english word' do
-      game = Game.new('ABCDE')
-      guess_word = 'ALIVE'
+      game = Game.new('ALIVE')
+      guess_word = 'ABCDE'
 
       result = game.match_word(guess_word)
 
