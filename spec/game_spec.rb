@@ -1,20 +1,34 @@
-class Game
-  # Now it's necessary to assign secret_word to @secret_word
-  def initialize(secret_word)
-    @secret_word = secret_word
-  end
+require 'game'
 
-  def match_word(guess_word)
-    result = "\u{1F7E6}\u{1F7E6}\u{1F7E6}\u{1F7E6}\u{1F7E6}"
+describe 'Game' do
+  describe '#match_word' do
+    it 'should handle all incorrect letters well' do
+      game = Game.new('DRINK')
+      guess_word = 'HELLO'
 
-    # Now it's necessary to properly handle a correct letter in incorrect position
-    guess_word.split('').each_with_index do |letter, index|
-      if @secret_word.include?(letter)
-        # "\u{1F7E8}" is the ASCII code for 🟨
-        result[index] = "\u{1F7E8}"
-      end
+      result = game.match_word(guess_word)
+
+      expect(result).to eq("\u{1F7E6}\u{1F7E6}\u{1F7E6}\u{1F7E6}\u{1F7E6}")
     end
-    
-    result
+
+    it 'should handle a wrongly positioned letter well' do
+      game = Game.new('DRINK')
+      guess_word = 'CLEAN'
+
+      result = game.match_word(guess_word)
+
+      expect(result).to eq("\u{1F7E6}\u{1F7E6}\u{1F7E6}\u{1F7E6}\u{1F7E8}")
+    end
+
+    # This is our new spec.
+    # By now you should have already understood the structure of this spec
+    it 'should handle a correctly positioned letter well' do
+      game = Game.new('DRINK')
+      guess_word = 'ALIVE'
+
+      result = game.match_word(guess_word)
+
+      expect(result).to eq("\u{1F7E6}\u{1F7E6}\u{1F7E9}\u{1F7E6}\u{1F7E6}")
+    end
   end
 end
