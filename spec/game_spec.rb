@@ -30,5 +30,14 @@ describe 'Game' do
 
       expect(result).to eq("\u{1F7E6}\u{1F7E6}\u{1F7E9}\u{1F7E6}\u{1F7E6}")
     end
+
+    it 'should be a valid english word' do
+      game = Game.new('ABCDE')
+      guess_word = 'ALIVE'
+
+      result = game.match_word(guess_word)
+
+      expect(result).to eq("Not a valid English word!")
+    end
   end
 end
